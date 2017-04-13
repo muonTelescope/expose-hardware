@@ -18,7 +18,7 @@ for (getter in config.sensors) {
 }
 
 // Begin watching coincidence pins
-var Coincidence = require("./coincidence");
+var Coincidence = require("./coincidence/coincidence.js");
 var coincidence = new Coincidence(config.pins);
 
 // Data destination: Where to send the data db connection stays "open"
@@ -26,7 +26,7 @@ var LogToDB = require("./logToDB");
 var db = new LogToDB(config.databaseLocation, config.detector);
 
 // mppc-interface import
-var MppcInterface = require('./mppc-interface');
+var MppcInterface = require('./mppc-interface/mppc-interface.js');
 var mppcInterface = config.mppcInterface;
 for(board in mppcInterface){
     mppcInterface[board] = new MppcInterface(mppcInterface[board]);

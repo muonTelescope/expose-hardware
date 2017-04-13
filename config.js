@@ -56,7 +56,7 @@ config.sensors = [
 // Get all the data from the GPS module, and send that.
 var gpsData; //Single variable only set once per aggergate data
 function gps(){
-    var NEO6m = require('./neo6m');
+    var NEO6m = require('./neo6m/neo6m.js');
     var gps = new NEO6m();
     while (true) {
         try {
@@ -99,32 +99,32 @@ function pressure(){
 
 // Voltage and temprature functions
 function voltage0(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {voltage0: mppcInterface.readVoltage(0)};
 }
 function voltage1(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {voltage1: mppcInterface.readVoltage(1)};
 }
 function voltage2(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {voltage2: mppcInterface.readVoltage(2)};
 }
 function voltage3(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {voltage3: mppcInterface.readVoltage(3)};
 }
 function temp0(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {temp0: mppcInterface.readTemp(0)};
 }
 function temp1(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {temp1: mppcInterface.readTemp(1)};
 }
@@ -134,7 +134,7 @@ function temp2(){
     return {temp2: mppcInterface.readTemp(2)};
 }
 function temp3(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('./mppc-interface/mppc-interface.js');
     var mppcInterface = new MppcInterface(this.mppcInterface[0]);
     return {temp3: mppcInterface.readTemp(3)};
 }
