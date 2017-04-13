@@ -1,0 +1,18 @@
+{
+  "name": "expose-hardware",
+  "version": "1.0.0",
+  "description": "Gets counts and sends them to servers, exposes HV and start/stop logging, and takes all data form sensors.",
+  "author": "Sawaiz Syed asyed5@gsu.edu",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm install --no-bin-links && nodemon -L --debug=5858 server.js"
+  },
+  "dependencies": {
+    "raspi": "*",
+    "raspi-i2c": "*",
+    "onoff": "*",
+    "nodemon": "*",
+    "express": "*",
+    "request": "*"
+  }
+}
