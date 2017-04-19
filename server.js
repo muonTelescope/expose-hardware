@@ -18,7 +18,7 @@ for (getter in config.sensors) {
 }
 
 // Begin watching coincidence pins
-var Coincidence = require("./coincidence/coincidence.js");
+var Coincidence = require("coincidence");
 var coincidence = new Coincidence(config.pins);
 
 // Data destination: Where to send the data db connection stays "open"
@@ -26,10 +26,18 @@ var LogToDB = require("./logToDB");
 var db = new LogToDB(config.databaseLocation, config.detector);
 
 // mppc-interface import
-var MppcInterface = require('./mppc-interface/mppc-interface.js');
-var mppcInterface = config.mppcInterface;
+var MppcInterface = require('mppc-interface');
+var mppcInterface = config.mppcInterface.slice(0);
 for(board in mppcInterface){
     mppcInterface[board] = new MppcInterface(mppcInterface[board]);
+}
+
+// Set the default bias voltages
+for(board in mppcInterface){
+    for(channel in config.defaultBias[board]){
+        var voltage = config.defaultBias[board][channel];
+        mppcInterface[board].setTarget(Number(channel), voltage);
+    }
 }
 
 // ROUTES FOR OUR API
@@ -38,16 +46,16 @@ var router = express.Router();              // get an instance of the express Ro
 
 // Base route with info to make sure everything is working
 router.get('/', function (req, res) {
-    res.send("<p>Welcome to the API '/', availible options are  \
-    \n                                                          \
-    \n/startLog,                                                \
-    \n/stopLog,                                                 \
-    \n/logs,                                                    \
-    \n/logs/<fileName>,                                         \
-    \n/mppcInterface/<board>.</p>");
+    res.send("<p>Welcome to the API '/', availible options are      \
+    \n<br>                                                          \
+    \n<br>/startLog,                                                \
+    \n<br>/stopLog,                                                 \
+    \n<br>/logs,                                                    \
+    \n<br>/logs/\<fileName\>,                                       \
+    \n<br>/mppcInterface/\<board\>.</p>");
 });
 
-router.post('/beginLog', function (req, res) {
+router.post('/startLog', function (req, res) {
     if (logging) {
         res.json({ error: "Alerady Logging", data: logging.data  });
     } else {
@@ -78,7 +86,7 @@ router.get('/logs/:log', function (req, res) {
 
 router.get('/mppcInterface/:board', function (req, res) {
     var board = Number(req.params.board);
-    var data = mppcInterface[board].data();
+        var data = mppcInterface[board].data();
     data.board = board;
     res.json(data);
 });
