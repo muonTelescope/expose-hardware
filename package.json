@@ -17,7 +17,7 @@
     "coincidence": "muonTelescope/coincidence",
     "mpl3115a2": "Sawaiz/mpl3115a2",
     "mppc-interface": "muonTelescope/mppc-interface",
-    "neo6m": "file:neo6m",
+    "neo6m": "muonTelescope/neo6m",
     "sht3x": "Sawaiz/sht3x"
     
   }

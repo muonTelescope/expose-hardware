@@ -59,7 +59,7 @@ config.sensors = [
 // Get all the data from the GPS module, and send that.
 var gpsData; //Single variable only set once per aggergate data
 function gps(){
-    var NEO6m = require('./neo6m/neo6m.js');
+    var NEO6m = require("neo6m");
     var gps = new NEO6m();
     while (true) {
         try {
