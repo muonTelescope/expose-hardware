@@ -132,7 +132,7 @@ function temp1(){
     return {temp1: mppcInterface.readTemp(1)};
 }
 function temp2(){
-    var MppcInterface = require('./mppc-interface');
+    var MppcInterface = require('mppc-interface');
     var mppcInterface = new MppcInterface(config.mppcInterface[0]);
     return {temp2: mppcInterface.readTemp(2)};
 }
