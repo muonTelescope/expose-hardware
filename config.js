@@ -15,9 +15,9 @@ config.defaultBias = [[0,55.11,55.12,55.17,0,0,0,0]];
 
 // Detector model
 config.detector = {};
-config.detector.name = "Muon Telescope Alpha Rebuilt";
-config.detector.description = "The detector has been rebuilt after getting flodded. This one has temprature compensation on the sipms. 2mmx2mm 50uM pixel size TSV MPPC Attached to 145mmx145mm plastic scintilator pannel with embedded fibers.";
-config.detector.alias = "alphaRebuilt";
+config.detector.name = "Muon Telescope Name";
+config.detector.description = "The detector has a extensive discription. It can be many sentences.";
+config.detector.alias = "muonTelescopeName";
 config.detector.apiKey = "dc30a116-606a-4f61-b4ed-a74c5411a92e";
 config.detector.tags = "Three Paddle, Humidity, GPS";
 config.detector.location = "Atlanta, GA";
@@ -39,10 +39,10 @@ config.pins = [
 
 //Sensor: functions to get data
 config.sensors = [
-    // gps,
-    // latitude,
-    // longitude,
-    // altitude,
+    gps,
+    latitude,
+    longitude,
+    altitude,
     pressure,
     temp,
     humidity,
@@ -56,34 +56,34 @@ config.sensors = [
     temp3
 ];
 
-// // Get all the data from the GPS module, and send that.
-// var gpsData; //Single variable only set once per aggergate data
-// function gps(){
-//     var NEO6m = require('./neo6m/neo6m.js');
-//     var gps = new NEO6m();
-//     while (true) {
-//         try {
-//             var data = gps.data();
-//         } catch (EIO) {
-//             return { gps: "Communication error" };
-//             break;
-//         }
-//         if (data != null) {
-//             gpsData = data;
-//             return {gps: data.valid};
-//             break;
-//         }
-//     }
-// }
-// function latitude (){
-//     return {latidude : gpsData.latitude};
-// }
-// function longitude(){
-//     return {longitude : gpsData.longitude};
-// }
-// function altitude(){
-//     return {altitude : gpsData.altitude};
-// }
+// Get all the data from the GPS module, and send that.
+var gpsData; //Single variable only set once per aggergate data
+function gps(){
+    var NEO6m = require('./neo6m/neo6m.js');
+    var gps = new NEO6m();
+    while (true) {
+        try {
+            var data = gps.data();
+        } catch (EIO) {
+            return { gps: "Communication error" };
+            break;
+        }
+        if (data != null) {
+            gpsData = data;
+            return {gps: data.valid};
+            break;
+        }
+    }
+}
+function latitude (){
+    return {latidude : gpsData.latitude};
+}
+function longitude(){
+    return {longitude : gpsData.longitude};
+}
+function altitude(){
+    return {altitude : gpsData.altitude};
+}
 function temp(){
     var SHT3x = require("sht3x");
     var sht32 = new SHT3x();
